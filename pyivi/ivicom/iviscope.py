@@ -151,7 +151,7 @@ class ShortCutScope(ShortCut):
     def __init__(self, parent):
         super(ShortCutScope, self).__init__(parent)
         self.channel_idx = 1
-        self.channel_idxs = Enum(['select channel'] + parent.channels.keys())
+        self.channel_idxs = Enum(['select channel'] + list(parent.channels.keys()))
     @property
     def channel_name(self):
         return self.parent.channels.keys()[self.channel_idx-1]
