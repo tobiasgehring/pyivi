@@ -154,7 +154,7 @@ class ShortCutScope(ShortCut):
         self.channel_idxs = Enum(['select channel'] + list(parent.channels.keys()))
     @property
     def channel_name(self):
-        return self.parent.channels.keys()[self.channel_idx-1]
+        return list(self.parent.channels.keys())[self.channel_idx-1]
     
     def fetch(self):
         return self.parent.measurements[self.channel_name].fetch_waveform()

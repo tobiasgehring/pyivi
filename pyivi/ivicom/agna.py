@@ -88,12 +88,12 @@ class ShortCutNA(ShortCut):
     def __init__(self, parent):
         super(ShortCutNA, self).__init__(parent)
         self.channel_idx = 1
-        self.channel_idxs = Enum(['select channel'] + parent.channels.keys())
+        self.channel_idxs = Enum(['select channel'] + list(parent.channels.keys()))
         self._measurement_idx = 1
         
         self.measurement_idx = 1
         self.measurement_idxs = Enum(['select measurement'] + \
-                                     self.active_channel.measurements.keys())
+                                     list(self.active_channel.measurements.keys()))
         self.create_measurement()
     
     @property
@@ -131,7 +131,7 @@ class ShortCutNA(ShortCut):
     
     @property
     def measurement_name(self):
-        return self.active_channel.measurements.keys()[self.measurement_idx-1]
+        return list(self.active_channel.measurements.keys())[self.measurement_idx-1]
     
     @property
     def active_measurement(self):
@@ -142,7 +142,7 @@ class ShortCutNA(ShortCut):
         
     @property
     def channel_name(self):
-        return self.parent.channels.keys()[self.channel_idx-1]
+        return list(self.parent.channels.keys())[self.channel_idx-1]
 
     @property
     def active_channel(self):
