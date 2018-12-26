@@ -10,6 +10,7 @@ from pyivi import choices
                          
 from collections import OrderedDict
 from numpy import array, double, linspace
+from comtypes.safearray import safearray_as_ndarray
 
 class Channel(object):
     def __init__(self, name, parent):
@@ -41,8 +42,9 @@ class Measurement(object):
                                  'ReadWaveformMinMax'])
 
     def fetch_waveform(self):
-        y_trace, initial_x, x_increment = self.session.FetchWaveform()
-        y_trace = array(list(y_trace))
+        with safearray_as_ndarray:
+            y_trace, initial_x, x_increment = self.session.FetchWaveform()
+        #y_trace = array(list(y_trace))
         x_trace = linspace(initial_x, 
                            x_increment*len(y_trace), 
                            len(y_trace), 
@@ -143,7 +145,8 @@ class ShortCutScope(ShortCut):
                                ("ch_offset", "offset"),
                                ("ch_range", "range"),
                                ("ch_input_impedance", "input_impedance"),
-                               ("ch_input_frequency_max", "input_frequency_max")]
+                               ("ch_input_frequency_max", "input_frequency_max"),
+                               ("ch_probe_attenuation", "probe_attenuation")]
     
     _fields = [field[0] for field in _acquisition_fields]
     _ch_fields = [field[0] for field in _channel_related_fields]                           

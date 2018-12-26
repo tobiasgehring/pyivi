@@ -26,7 +26,8 @@ class ShortCutScope(ShortCut):
                                ("ch_enabled", "channel_enabled"),
                                ("ch_input_impedance", "input_impedance"),
                                ("ch_input_frequency_max", "max_input_frequency"),
-                               ("ch_range", "vertical_range")]
+                               ("ch_range", "vertical_range"),
+                               ("ch_probe_attenuation", "probe_attenuation")]
     _fields_direct = [("acquisition_type" ,"acquisition_type"),
                ("record_length", "horz_record_length"),
                ("time_per_record","horz_time_per_record"),
